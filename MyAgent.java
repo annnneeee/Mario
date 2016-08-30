@@ -52,29 +52,27 @@ public class MyAgent extends BasicMarioAIAgent implements Agent
 	// Actually perform an action by setting a slot in the action array to be true
 	public boolean[] getAction()
 	{
-		//action[Mario.KEY_SPEED] = action[Mario.KEY_JUMP] = isMarioAbleToJump || !isMarioOnGround;
-		//action[Mario.KEY_RIGHT] = true;
-      //System.out.print(mergedObservation.length);
-      for (int i = 0; i < mergedObservation.length; i++) {
-			for (int j = 0; j < mergedObservation[0].length; j++){
-            int marioI = mergedObservation.length / 2;
-            int marioJ = mergedObservation.length / 2;
-					
-				if (isEmpty(marioI+1, marioJ)) {
-					action[Mario.KEY_RIGHT] = true;;
-				}
-            else if (hasEnemy(marioI, marioJ+1)) {
-					action[Mario.KEY_LEFT] = true;;
-				}
-				//else if (!isEmpty(marioI+1, marioJ)) {
-				//	action[Mario.KEY_SPEED] = action[Mario.KEY_JUMP] = isMarioAbleToJump || !isMarioOnGround;
-				//}
-				//else {
-				//	//action[Mario.KEY_RIGHT] = true;
-				//}
-         }
-      }   
-         
+		  
+        if (hasEnemy(9,10) || hasEnemy(9,11) || hasEnemy(9,12))
+        {
+            action[Mario.KEY_JUMP] = isMarioAbleToJump || !isMarioOnGround;
+        }
+        
+        /*else if (hasEnemy(10, 9) || hasEnemy(11,9) || hasEnemy(12,9))
+        {
+            action[Mario.KEY_LEFT] = true;
+        }*/
+        
+        else if (isEmpty(9,10)){
+            action[Mario.KEY_RIGHT] = true;
+        }
+        
+        else if (!isEmpty(9,10))
+        {
+            action[Mario.KEY_JUMP] = isMarioAbleToJump || !isMarioOnGround;
+            //action[Mario.KEY_SPEED] = 
+        }
+        
          
         printObservation();
 		  return action;
